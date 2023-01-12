@@ -1,6 +1,3 @@
-import numpy as np
-import math
-
 # sigma equation
 def sigma_equation(cecita, complessita, disistima_espressa, disistima_ricevuta, rifiuto_effettivo):
     coef0 = 1
