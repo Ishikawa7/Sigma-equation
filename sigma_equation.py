@@ -3,7 +3,7 @@ def sigma_equation(cecita, complessita, disistima_espressa, disistima_ricevuta, 
     coef0 = 1
     coef1 = 1
 
-    tensione0 = cecita + complessita
+    tensione0 = cecita + complessita #cieco nel libro
     diff0 = abs(complessita - cecita)
     if complessita > cecita:
         coef0 = 1 - (1 + ( (1-diff0**2) / diff0 )**2 )**(-1)
