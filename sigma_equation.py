@@ -5,9 +5,13 @@
 #	float tensione0,tensione1,tensione2,tensione,lavoro;
 #	float coef,diff,diff1;
 #	float stima,cieco,compl,rifef,disis,ripre;
-#	cieco=(punti[pat][1]+punti[pat][2])/20;
-#	compl=punti[pat][15]/10;rifef=punti[pat][3]/10;
-#	ripre=punti[pat][4]/10;disis=punti[pat][5]/10;
+#	
+#   cieco=(punti[pat][1]+punti[pat][2])/20;
+#	compl=punti[pat][15]/10;
+#   rifef=punti[pat][3]/10;
+#	ripre=punti[pat][4]/10;
+#   disis=punti[pat][5]/10;
+#
 #	tensione0 = cieco + compl;
 #	diff = compl - cieco;
 #	diff1 = cieco - compl;
@@ -37,11 +41,11 @@ from math import sqrt
 
 ## CHANGES IN VARIABLES NAMES
 
-#cieco = cecita
-#compl = complessita
-#rifef = rifiuto_effettivo
-#ripre = dististima_espressa
-#disis = disistima_ricevuta
+#cieco = cecita (OK)
+#compl = complessita (OK)
+#rifef = rifiuto_effettivo (OK)
+#ripre = dististima_espressa (OK)
+#disis = disistima_ricevuta (OK)
 
 # SIGMA EQUATION BOOK
 def sigma_equation_book(cecita, complessita, disistima_espressa, disistima_ricevuta, rifiuto_effettivo):
