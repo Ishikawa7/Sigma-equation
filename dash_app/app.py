@@ -9,7 +9,7 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
 # create a dash app
-app = dash.Dash()
+app = dash.Dash(external_stylesheets=[dbc.themes.COSMO])
 
 # load tensor data from file
 tensore_equazione_sigma = np.load('./tensore_equazione_sigma_book.npy')
@@ -36,6 +36,10 @@ def create_3d_surface(x, y, z):
             xaxis_title='Disistima ricevuta',
             yaxis_title='Rifiuto effettivo',
             zaxis_title='Sigma'))
+    # change hovertext replacing x, y and z with "disistima ricevuta", "rifiuto effettivo" and "sigma"
+    fig.data[0].hovertemplate = 'Disistima ricevuta: %{x:.2f}<br>Rifiuto effettivo: %{y:.2f}<br>Sigma: %{z:.2f}<extra></extra>'
+    # increase the font size of the axis titles
+    fig.update_layout(scene=dict(xaxis_title_font_size=20, yaxis_title_font_size=20, zaxis_title_font_size=20))
     return fig
 
 # create a layout for the app with sliders for changing the z value passed to the function
@@ -45,7 +49,7 @@ app.layout = html.Div([
     dcc.Tab(
         html.Div([
             dcc.Graph(id='3d-surface', figure=create_3d_surface(np.arange(0, 1.1, 0.1), np.arange(0, 1.1, 0.1), tensore_equazione_sigma[0,0,0,:,:])),
-        ], style={'width': '60%', 'display': 'inline-block'}),
+        ], style={'width': '63%', 'display': 'inline-block'}),
         label='Equazione sigma',),
     # display the sliders next to the figure
     dcc.Tab(
@@ -57,8 +61,9 @@ app.layout = html.Div([
                     max=100,
                     step=10,
                     value=0,
-                    marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
+                    marks={i: {'label': f'{i}%', 'style': {'font-size': 20}} for i in range(0, 101, 10)},
                 ),
+                html.Br(),
                 html.H3('Complessità'),
                 dcc.Slider(
                     id='complessita-slider',
@@ -66,8 +71,9 @@ app.layout = html.Div([
                     max=100,
                     step=10,
                     value=0,
-                    marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
+                    marks={i: {'label': f'{i}%', 'style': {'font-size': 20}} for i in range(0, 101, 10)},
                 ),
+                html.Br(),
                 html.H3('Disistima espressa'),
                 dcc.Slider(
                     id='disistima_espressa-slider',
@@ -75,9 +81,9 @@ app.layout = html.Div([
                     max=100,
                     step=10,
                     value=0,
-                    marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
+                    marks={i: {'label': f'{i}%', 'style': {'font-size': 20}} for i in range(0, 101, 10)},
                 ),
-        ], style={'width': '35%','padding': '0px 0px 0px 0px','display': 'inline-block','vertical-align': 'top',
+        ], style={'width': '35%','padding': '10px 10px 10px 10px','display': 'inline-block','vertical-align': 'top',
 }),
         label='Parametri',),
 ])
