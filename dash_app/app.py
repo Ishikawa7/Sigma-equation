@@ -22,14 +22,14 @@ def create_3d_surface(x, y, z):
             contours=dict(
                     x=dict(show=True, highlight=True, highlightcolor='red', project=dict(z=True)), 
                     y=dict(show=True, highlight=True, highlightcolor='red', project=dict(z=True)), 
-                    z=dict(show=True, highlight=True, highlightcolor='red', project=dict(z=True))
+                    z=dict(show=False, highlight=True, highlightcolor='red', project=dict(z=True))
                     ), 
                 )
         ]
     )
     fig.update_layout(
         autosize=False,
-        width=800, height=800,
+        width=1100, height=800,
         margin=dict(l=65, r=50, b=65, t=90),
         uirevision='constant',
         scene = dict(
@@ -83,7 +83,7 @@ app.layout = html.Div([
                     value=0,
                     marks={i: {'label': f'{i}%', 'style': {'font-size': 20}} for i in range(0, 101, 10)},
                 ),
-        ], style={'width': '35%','padding': '10px 10px 10px 10px','display': 'inline-block','vertical-align': 'top',
+        ], style={'width': '35%','padding': '10px 10px 10px 10px','display': 'inline-block','vertical-align': 'top','horizoltal-align':"left"
 }),
         label='Parametri',),
 ])
