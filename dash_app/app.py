@@ -31,6 +31,7 @@ def create_3d_surface(x, y, z):
         autosize=False,
         width=800, height=800,
         margin=dict(l=65, r=50, b=65, t=90),
+        uirevision='constant',
         scene = dict(
             xaxis_title='Disistima ricevuta',
             yaxis_title='Rifiuto effettivo',
@@ -41,39 +42,44 @@ def create_3d_surface(x, y, z):
 app.layout = html.Div([
     html.H1('Sigma equation'),
     # display the two divs next to each other
-    html.Div([
-        dcc.Graph(id='3d-surface', figure=create_3d_surface(np.arange(0, 1.1, 0.1), np.arange(0, 1.1, 0.1), tensore_equazione_sigma[0,0,0,:,:])),
-    ], style={'width': '48%', 'display': 'inline-block'}),
+    dcc.Tab(
+        html.Div([
+            dcc.Graph(id='3d-surface', figure=create_3d_surface(np.arange(0, 1.1, 0.1), np.arange(0, 1.1, 0.1), tensore_equazione_sigma[0,0,0,:,:])),
+        ], style={'width': '60%', 'display': 'inline-block'}),
+        label='Equazione sigma',),
     # display the sliders next to the figure
-    html.Div([
-            html.H3('Cecità'),
-            dcc.Slider(
-                id='cecita-slider',
-                min=0,
-                max=100,
-                step=10,
-                value=0,
-                marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
-            ),
-            html.H3('Complessità'),
-            dcc.Slider(
-                id='complessita-slider',
-                min=0,
-                max=100,
-                step=10,
-                value=0,
-                marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
-            ),
-            html.H3('Disistima espressa'),
-            dcc.Slider(
-                id='disistima_espressa-slider',
-                min=0,
-                max=100,
-                step=10,
-                value=0,
-                marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
-            ),
-    ], style={'width': '48%','padding': '0px 0px 0px 0px','display': 'inline-block'})
+    dcc.Tab(
+        html.Div([
+                html.H3('Cecità'),
+                dcc.Slider(
+                    id='cecita-slider',
+                    min=0,
+                    max=100,
+                    step=10,
+                    value=0,
+                    marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
+                ),
+                html.H3('Complessità'),
+                dcc.Slider(
+                    id='complessita-slider',
+                    min=0,
+                    max=100,
+                    step=10,
+                    value=0,
+                    marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
+                ),
+                html.H3('Disistima espressa'),
+                dcc.Slider(
+                    id='disistima_espressa-slider',
+                    min=0,
+                    max=100,
+                    step=10,
+                    value=0,
+                    marks={i: '{}%'.format(i) for i in range(0, 110, 10)}
+                ),
+        ], style={'width': '35%','padding': '0px 0px 0px 0px','display': 'inline-block','vertical-align': 'top',
+}),
+        label='Parametri',),
 ])
 
 # create a callback for updating the figure
